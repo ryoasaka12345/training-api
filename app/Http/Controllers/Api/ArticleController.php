@@ -23,4 +23,23 @@ class ArticleController extends Controller
     {
         return Article::find($id);
     }
+
+    /* 
+        Insert new item in table article
+    */
+    public function store(Request $request)
+    {
+        return Article::create($request->all());
+    }
+    
+    /* 
+        Update one item in table article
+    */
+    public function update(Request $request, $id)
+    {
+        $article = Article::findOrFail($id);
+        $article->update($request->all());
+
+        return $article;
+    }
 }

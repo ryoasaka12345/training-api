@@ -17,3 +17,18 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/* 
+    The route is fired by the "curl --location --request GET 'http://localhost:8000/api/hello-world'"
+        curl: command used download and upload files.
+        --location: required to issue a request.
+*/
+Route::get('hello-world', function() {
+    // "::" (scope resolution operator) : Refer to a static method
+    return ['data' => ['message'=>'Hello World API']];
+
+});
+
+Route::get('hello-asaka', function() {
+    return ['data' => ['massage'=>'Hello Asaka']];
+});

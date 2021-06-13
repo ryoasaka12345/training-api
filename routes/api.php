@@ -40,3 +40,10 @@ use App\Http\Controllers\Api\HelloWorldController;
 Route::get('hello-world-with-controller', [HelloWorldController::class, 'index']);
 
 Route::get('hello-asaka-with-controller', [HelloWorldController::class, 'index2']);
+
+/* 
+    Routes to excute CRUD
+*/
+use App\Http\Controllers\Api\ArticleController;
+Route::get('articles', [ArticleController::class, 'index']);
+Route::get('articles/{id}', [ArticleController::class, 'show']);

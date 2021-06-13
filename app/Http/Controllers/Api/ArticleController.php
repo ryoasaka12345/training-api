@@ -31,7 +31,7 @@ class ArticleController extends Controller
     {
         return Article::create($request->all());
     }
-    
+
     /* 
         Update one item in table article
     */
@@ -41,5 +41,16 @@ class ArticleController extends Controller
         $article->update($request->all());
 
         return $article;
+    }
+
+    /* 
+        Delete one item in table article by id
+    */
+    public function delete(Request $request, $id)
+    {
+        $article = Article::findOrFail($id);
+        $article->delete();
+
+        return 204;
     }
 }

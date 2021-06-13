@@ -32,3 +32,11 @@ Route::get('hello-world', function() {
 Route::get('hello-asaka', function() {
     return ['data' => ['massage'=>'Hello Asaka']];
 });
+
+/* 
+    Launch own controller
+*/
+use App\Http\Controllers\Api\HelloWorldController;
+Route::get('hello-world-with-controller', [HelloWorldController::class, 'index']);
+
+Route::get('hello-asaka-with-controller', [HelloWorldController::class, 'index2']);

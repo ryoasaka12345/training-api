@@ -14,7 +14,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         Auth::validate($credentials);
 
-        if (Auth::attempt($credentials)){
+        if (Auth::attempt($credentials)) {
             $user = Auth::guard()->user();
             $user->generateToken();
 
@@ -31,5 +31,17 @@ class LoginController extends Controller
         $errors = ['error' => trans('auth.failed')];
 
         return response()->json($errors, 422);
+    }
+
+    public function logout(Request $request)
+    {
+        $user = Auth::guard('api')->user();
+
+        if ($user) {
+            $user->api_token = null;
+            $user->save();
+        }
+
+        return response()->json(['data' => 'User logged out.'], 200);
     }
 }

@@ -23,20 +23,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         curl: command used download and upload files.
         --location: required to issue a request.
 */
-Route::get('hello-world', function() {
+Route::get('hello-world', function () {
     // "::" (scope resolution operator) : Refer to a static method
-    return ['data' => ['message'=>'Hello World API']];
-
+    return ['data' => ['message' => 'Hello World API']];
 });
 
-Route::get('hello-asaka', function() {
-    return ['data' => ['massage'=>'Hello Asaka']];
+Route::get('hello-asaka', function () {
+    return ['data' => ['massage' => 'Hello Asaka']];
 });
 
 /* 
     Launch own controller
 */
+
 use App\Http\Controllers\Api\HelloWorldController;
+
 Route::get('hello-world-with-controller', [HelloWorldController::class, 'index']);
 
 Route::get('hello-asaka-with-controller', [HelloWorldController::class, 'index2']);
@@ -44,13 +45,18 @@ Route::get('hello-asaka-with-controller', [HelloWorldController::class, 'index2'
 /* 
     Routes to excute CRUD
 */
+
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
-Route::get('articles', [ArticleController::class, 'index']);
-Route::get('articles/{id}', [ArticleController::class, 'show']);
-Route::post('articles', [ArticleController::class, 'store']);
-Route::put('articles/{id}', [ArticleController::class, 'update']);
-Route::delete('articles/{id}', [ArticleController::class, 'delete']);
-Route::post('register', [RegisterController::class,'register']);
+
+Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [LoginController::class, 'login']);
+Route::middleware(['auth:api'])->group(function () {
+    Route::get('articles', [ArticleController::class, 'index']);
+    Route::get('articles/{id}', [ArticleController::class, 'show']);
+    Route::post('articles', [ArticleController::class, 'store']);
+    Route::put('articles/{id}', [ArticleController::class, 'update']);
+    Route::delete('articles/{id}', [ArticleController::class, 'delete']);
+    Route::post('logout', [LoginController::class, 'logout']);
+});

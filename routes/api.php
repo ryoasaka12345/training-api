@@ -49,6 +49,7 @@ Route::get('hello-asaka-with-controller', [HelloWorldController::class, 'index2'
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Api\ProductController;
 
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [LoginController::class, 'login']);
@@ -59,4 +60,10 @@ Route::middleware(['auth:api'])->group(function () {
     Route::put('articles/{id}', [ArticleController::class, 'update']);
     Route::delete('articles/{id}', [ArticleController::class, 'delete']);
     Route::post('logout', [LoginController::class, 'logout']);
+    // homework
+    Route::get('products/get-all', [ProductController::class, 'index']);
+    Route::get('products/get-by-product-no/{id}', [ProductController::class, 'show']);
+    Route::delete('products/delete/{id}', [ProductController::class, 'delete']);
+    Route::post('products/create', [ProductController::class, 'store']);
+    Route::put('products/update/{id}', [ProductController::class, 'update']);
 });

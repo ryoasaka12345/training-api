@@ -45,8 +45,10 @@ Route::get('hello-asaka-with-controller', [HelloWorldController::class, 'index2'
     Routes to excute CRUD
 */
 use App\Http\Controllers\Api\ArticleController;
+use App\Http\Controllers\Auth\RegisterController;
 Route::get('articles', [ArticleController::class, 'index']);
 Route::get('articles/{id}', [ArticleController::class, 'show']);
 Route::post('articles', [ArticleController::class, 'store']);
 Route::put('articles/{id}', [ArticleController::class, 'update']);
 Route::delete('articles/{id}', [ArticleController::class, 'delete']);
+Route::post('register', [RegisterController::class,'register']);

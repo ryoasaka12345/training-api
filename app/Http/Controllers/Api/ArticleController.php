@@ -19,9 +19,15 @@ class ArticleController extends Controller
     /* 
         Retrieve a single one => select item in table article by id
     */
-    public function show($id)
+    public function show(Article $id)
     {
-        return Article::find($id);
+        /* Article $id correnspond to the article-class property */
+        return $id;
+
+        /* 
+        old: (In this case, the argument is not article $id, but $id)
+            return Article::find($id);
+        */
     }
 
     /* 
@@ -35,22 +41,27 @@ class ArticleController extends Controller
     /* 
         Update one item in table article
     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Article $id)
     {
-        $article = Article::findOrFail($id);
-        $article->update($request->all());
+        $id->update($request->all());
 
-        return $article;
+        return response()->json($id, 200);
+
+        /* 
+        old: (In this case, the argument is not article $id, but $id)
+            $article = Article::findOrFail($id);
+            $artile->update($request->all());
+            return $article;
+        */
     }
 
     /* 
         Delete one item in table article by id
     */
-    public function delete(Request $request, $id)
+    public function delete(Request $request, Article $id)
     {
-        $article = Article::findOrFail($id);
-        $article->delete();
+        $id->delete();
 
-        return 204;
+        return response()->json(null, 204);
     }
 }

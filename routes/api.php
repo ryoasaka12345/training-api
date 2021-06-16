@@ -61,9 +61,9 @@ Route::middleware(['auth:api'])->group(function () {
     Route::delete('articles/{id}', [ArticleController::class, 'delete']);
     Route::post('logout', [LoginController::class, 'logout']);
     // homework
-    Route::get('products/get-all', [ProductController::class, 'index']);
-    Route::get('products/get-by-product-no/{id}', [ProductController::class, 'show']);
-    Route::delete('products/delete/{id}', [ProductController::class, 'delete']);
-    Route::post('products/create', [ProductController::class, 'store']);
-    Route::put('products/update/{id}', [ProductController::class, 'update']);
+    Route::post('products/create', [ProductController::class, 'store']); 
 });
+Route::get('products/get-all', [ProductController::class, 'index']); //move-away
+Route::get('products/get-by-product-no/{id}', [ProductController::class, 'show']); //move-away
+Route::delete('products/delete/{id}', [ProductController::class, 'delete']); //move-away
+Route::put('products/update/{id}', [ProductController::class, 'update']); //move-away
